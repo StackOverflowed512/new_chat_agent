@@ -1,0 +1,134 @@
+[
+  {
+    "id": "travel",
+    "industry": "Travel & Tourism",
+    "company_name": "Wanderlust Travels",
+    "ceo_email": "ceo@wanderlust.com",
+    "offerings_label": "Destinations",
+    "sample_data": [
+      {"name": "Paris", "price": "$1200", "details": "City of lights, Eiffel Tower tour."},
+      {"name": "Kyoto", "price": "$1500", "details": "Cherry blossoms and ancient temples."}
+    ]
+  },
+  {
+    "id": "real_estate",
+    "industry": "Real Estate",
+    "company_name": "Prime Properties",
+    "ceo_email": "ceo@primeprops.com",
+    "offerings_label": "Listings",
+    "sample_data": [
+      {"name": "Downtown Loft", "price": "$500,000", "details": "2 Bed, 2 Bath, City view."},
+      {"name": "Suburban Home", "price": "$850,000", "details": "4 Bed, 3 Bath, Large backyard."}
+    ]
+  },
+  {
+    "id": "healthcare",
+    "industry": "Healthcare",
+    "company_name": "CarePlus Clinic",
+    "ceo_email": "admin@careplus.com",
+    "offerings_label": "Services",
+    "sample_data": [
+      {"name": "General Checkup", "price": "$150", "details": "Comprehensive physical exam."},
+      {"name": "Dental Cleaning", "price": "$100", "details": "X-rays and cleaning."}
+    ]
+  },
+  {
+    "id": "tech_support",
+    "industry": "Tech Support",
+    "company_name": "TechFix Solutions",
+    "ceo_email": "support@techfix.com",
+    "offerings_label": "Support Plans",
+    "sample_data": [
+      {"name": "Basic Support", "price": "$29/mo", "details": "Remote desktop support 9-5."},
+      {"name": "Enterprise", "price": "$99/mo", "details": "24/7 Priority support."}
+    ]
+  },
+  {
+    "id": "fitness",
+    "industry": "Fitness & Wellness",
+    "company_name": "Iron Gym",
+    "ceo_email": "coach@irongym.com",
+    "offerings_label": "Memberships",
+    "sample_data": [
+      {"name": "Standard", "price": "$40/mo", "details": "Access to gym equipment."},
+      {"name": "Pro", "price": "$70/mo", "details": "Classes + Sauna access."}
+    ]
+  },
+  {
+    "id": "education",
+    "industry": "Education",
+    "company_name": "Future Academics",
+    "ceo_email": "dean@future.edu",
+    "offerings_label": "Courses",
+    "sample_data": [
+      {"name": "Python 101", "price": "$200", "details": "Intro to programming."},
+      {"name": "Data Science", "price": "$500", "details": "Machine Learning and AI."}
+    ]
+  },
+  {
+    "id": "retail",
+    "industry": "E-Commerce Retail",
+    "company_name": "ShopTrend",
+    "ceo_email": "sales@shoptrend.com",
+    "offerings_label": "Products",
+    "sample_data": [
+      {"name": "Sneakers", "price": "$80", "details": "Running shoes, various sizes."},
+      {"name": "Smart Watch", "price": "$150", "details": "Tracks heart rate and steps."}
+    ]
+  },
+  {
+    "id": "finance",
+    "industry": "Financial Services",
+    "company_name": "SecureWealth",
+    "ceo_email": "advisor@securewealth.com",
+    "offerings_label": "Services",
+    "sample_data": [
+      {"name": "Retirement Planning", "price": "Consultation", "details": "401k and IRA strategy."},
+      {"name": "Tax Filing", "price": "$300", "details": "Annual tax return preparation."}
+    ]
+  },
+  {
+    "id": "automotive",
+    "industry": "Automotive",
+    "company_name": "AutoDrive Motors",
+    "ceo_email": "sales@autodrive.com",
+    "offerings_label": "Vehicles",
+    "sample_data": [
+      {"name": "Sedan LX", "price": "$25,000", "details": "Fuel efficient, 5 seater."},
+      {"name": "SUV Max", "price": "$40,000", "details": "All-wheel drive, spacious."}
+    ]
+  },
+  {
+    "id": "legal",
+    "industry": "Legal Services",
+    "company_name": "Justice Law Firm",
+    "ceo_email": "attorney@justicelaw.com",
+    "offerings_label": "Services",
+    "sample_data": [
+      {"name": "Consultation", "price": "$200/hr", "details": "Legal advice on contracts."},
+      {"name": "Will Creation", "price": "$500", "details": "Estate planning document."}
+    ]
+  },
+  {
+    "id": "event_planning",
+    "industry": "Event Planning",
+    "company_name": "Grand Events",
+    "ceo_email": "planner@grandevents.com",
+    "offerings_label": "Packages",
+    "sample_data": [
+      {"name": "Wedding", "price": "$5000+", "details": "Full service wedding planning."},
+      {"name": "Corporate Party", "price": "$2000+", "details": "Office parties and galas."}
+    ]
+  },
+  {
+    "id": "restaurant",
+    "industry": "Restaurant",
+    "company_name": "Gourmet Bistro",
+    "ceo_email": "chef@gourmetbistro.com",
+    "offerings_label": "Menu Items",
+    "sample_data": [
+      {"name": "Steak Frites", "price": "$35", "details": "Ribeye with truffle fries."},
+      {"name": "Seafood Pasta", "price": "$28", "details": "Fresh catch of the day."}
+    ]
+  }
+]

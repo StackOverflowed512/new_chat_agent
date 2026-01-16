@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Business Agent</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        /* Specific styles for the domain selector */
+        .preset-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .preset-card {
+            background-color: var(--bg-secondary);
+            border: 1px solid #334155;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        .preset-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+        .preset-card.active {
+            background-color: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+        .preset-card h4 {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        .preset-card span {
+            font-size: 0.7rem;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="brand">
+                <h1 id="brand-name">Agent AI</h1>
+                <p>Configurable Assistant</p>
+            </div>
+            
+            <div class="menu">
+                <button onclick="showSection('home')" class="active">Home / Setup</button>
+                <button onclick="showSection('chat')">Live Chat</button>
+                <button onclick="showSection('analytics')">Analytics</button>
+                <button onclick="showSection('config')">Advanced Config</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            
+            <!-- Home / Setup Section -->
+            <section id="home-section" class="active-section">
+                <h2>Select Your Industry</h2>
+                <p style="color:var(--text-secondary)">Choose a preset to instantly configure the agent for your domain.</p>
+                
+                <div id="preset-container" class="preset-grid">
+                    <!-- Loading... -->
+                </div>
+            </section>
+
+            <!-- Chat Section -->
+            <section id="chat-section" class="hidden-section">
+                <div class="chat-header">
+                    <h2 id="agent-name-display">Assistant</h2>
+                    <span class="status-dot"></span> Online
+                </div>
+                <div class="chat-window" id="chat-window">
+                    <div class="message bot">
+                        <div class="bubble">
+                            Hello! How can I assist you today?
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" id="user-input" placeholder="Type your message..." onkeypress="handleEnter(event)">
+                    <button onclick="sendMessage()">Send</button>
+                </div>
+            </section>
+
+            <!-- Analytics Section -->
+            <section id="analytics-section" class="hidden-section">
+                <h2>Dashboard Analytics</h2>
+                <div class="stats-grid">
+                    <div class="card">
+                        <h3>Total Sessions</h3>
+                        <p id="total-sessions">0</p>
+                    </div>
+                    <div class="card">
+                        <h3>Avg Chat Duration</h3>
+                        <p id="avg-duration">0 min</p>
+                    </div>
+                </div>
+                <h3>Recent Interactions</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Mobile</th>
+                                <th>Topic</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-table-body">
+                            <!-- Populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Config Section -->
+            <section id="config-section" class="hidden-section">
+                <h2>Advanced Configuration</h2>
+                <div class="form-group">
+                    <label>Company Name</label>
+                    <input type="text" id="conf-company">
+                </div>
+                <div class="form-group">
+                    <label>Agent Name</label>
+                    <input type="text" id="conf-agent">
+                </div>
+                <div class="form-group">
+                    <label>CEO Email</label>
+                    <input type="text" id="conf-ceo">
+                </div>
+                <div class="form-group">
+                    <label>System Prompt (Override)</label>
+                    <textarea id="conf-prompt" rows="5" placeholder="Leave blank to use auto-generated prompt base on context."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>JSON Data (Products/Services)</label>
+                    <textarea id="conf-extra" rows="10"></textarea>
+                </div>
+                <button onclick="saveConfig()">Save Configuration</button>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

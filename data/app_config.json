@@ -1,0 +1,17 @@
+{
+  "company_name": "Future Academics",
+  "ceo_email": "dean@future.edu",
+  "agent_name": "Future Academics Assistant",
+  "products": [
+    {
+      "name": "Python 101",
+      "price": "$200",
+      "details": "Intro to programming."
+    },
+    {
+      "name": "Data Science",
+      "price": "$500",
+      "details": "Machine Learning and AI."
+    }
+  ]
+}
