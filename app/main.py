@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException, Depends, Request
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
@@ -25,6 +26,10 @@ app.add_middleware(
 
 # Mount Static Files
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
+@app.get("/")
+async def read_root():
+    return FileResponse('static/index.html')
 
 # DB Dependency
 def get_db():

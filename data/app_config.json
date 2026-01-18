@@ -1,17 +1,17 @@
 {
-  "company_name": "Grand Events",
-  "ceo_email": "planner@grandevents.com",
-  "agent_name": "Grand Events Assistant",
+  "company_name": "Future Academics",
+  "ceo_email": "dean@future.edu",
+  "agent_name": "Future Academics Assistant",
   "products": [
     {
-      "name": "Wedding",
-      "price": "$5000+",
-      "details": "Full service wedding planning."
+      "name": "Python 101",
+      "price": "$200",
+      "details": "Intro to programming."
     },
     {
-      "name": "Corporate Party",
-      "price": "$2000+",
-      "details": "Office parties and galas."
+      "name": "Data Science",
+      "price": "$500",
+      "details": "Machine Learning and AI."
     }
   ]
 }
