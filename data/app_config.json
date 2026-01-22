@@ -1,17 +1,5 @@
 {
-  "company_name": "SecureWealth",
-  "ceo_email": "advisor@securewealth.com",
-  "agent_name": "SecureWealth Assistant",
-  "products": [
-    {
-      "name": "Retirement Planning",
-      "price": "Consultation",
-      "details": "401k and IRA strategy."
-    },
-    {
-      "name": "Tax Filing",
-      "price": "$300",
-      "details": "Annual tax return preparation."
-    }
-  ]
+  "company_name": "Wanderlust Travels",
+  "ceo_email": "ceo@wanderlust.com",
+  "agent_name": "Wanderlust Travels Assistant"
 }

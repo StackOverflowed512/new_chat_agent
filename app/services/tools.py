@@ -7,7 +7,24 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, ListFlowable, ListItem
 from reportlab.lib.units import inch
 from bs4 import BeautifulSoup, NavigableString
+from duckduckgo_search import DDGS
 from app.core import config
+
+def search_web(query: str):
+    """
+    Searches the web for the given query and returns a summary of results.
+    """
+    try:
+        results = DDGS().text(query, max_results=5)
+        if not results:
+             return "No results found."
+        
+        summary = ""
+        for res in results:
+             summary += f"- {res['title']}: {res['body']} ({res['href']})\n"
+        return summary
+    except Exception as e:
+        return f"Search failed: {e}"
 
 # Load ENV variables for email
 EMAIL_HOST = os.getenv("EMAIL_HOST", "smtp.gmail.com")

@@ -222,3 +222,43 @@ async function saveConfig() {
     alert("Configuration Saved!");
     loadConfig();
 }
+
+async function uploadBrochure() {
+    const fileInput = document.getElementById('brochure-upload');
+    const statusP = document.getElementById('upload-status');
+    
+    if (!fileInput.files.length) {
+        alert("Please select a file first.");
+        return;
+    }
+    
+    const file = fileInput.files[0];
+    const formData = new FormData();
+    formData.append('file', file);
+    
+    statusP.innerText = "Uploading...";
+    
+    try {
+        const res = await fetch(`${apiBase}/config/upload_brochure`, {
+            method: 'POST',
+            body: formData
+        });
+        
+        if (!res.ok) {
+            const err = await res.json();
+            throw new Error(err.detail || "Upload failed");
+        }
+        
+        const data = await res.json();
+        statusP.innerText = `Success: ${data.message} (${data.extracted_chars} chars extract)`;
+        statusP.style.color = "var(--accent)";
+        
+        // Clear input
+        fileInput.value = "";
+        
+    } catch (e) {
+        console.error(e);
+        statusP.innerText = `Error: ${e.message}`;
+        statusP.style.color = "red";
+    }
+}

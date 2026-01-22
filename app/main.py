@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Depends, Request
+from fastapi import FastAPI, HTTPException, Depends, Request, UploadFile, File
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -100,7 +100,7 @@ def apply_preset(selection: PresetSelect):
         "ceo_email": selected["ceo_email"],
         "agent_name": f"{selected['company_name']} Assistant",
         # Auto-generated prompt handled by agent.py reading these values
-        "products": selected.get("sample_data", [])
+        # "products": selected.get("sample_data", []) -- Removed to enforce PDF-only knowledge
     }
     
     # Save it
@@ -172,6 +172,42 @@ def update_configuration(update: ConfigUpdate):
     config.save_config(current)
     return {"status": "Configuration updated", "config": current}
 
+@app.post("/api/config/upload_brochure")
+async def upload_brochure(file: UploadFile = File(...)):
+    """
+    Uploads a brochure (PDF or Text) and updates the knowledge base.
+    """
+    import shutil
+    try:
+        # Ensure directories exist
+        upload_dir = os.path.join("data", "uploads")
+        os.makedirs(upload_dir, exist_ok=True)
+        
+        file_path = os.path.join(upload_dir, file.filename)
+        with open(file_path, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+            
+        extracted_text = ""
+        if file.filename.lower().endswith(".pdf"):
+            import pypdf
+            reader = pypdf.PdfReader(file_path)
+            for page in reader.pages:
+                extracted_text += page.extract_text() + "\n"
+        else:
+            # Assume text/md
+            with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
+                extracted_text = f.read()
+                
+        # Save to knowledge_base.txt (Overwrite to keep single source of truth for now)
+        kb_path = os.path.join("data", "knowledge_base.txt")
+        with open(kb_path, "w", encoding="utf-8") as f:
+            f.write(extracted_text)
+            
+        return {"status": "success", "message": "Brochure processed and Knowledge Base updated.", "extracted_chars": len(extracted_text)}
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to process file: {str(e)}")
+
 @app.get("/api/analytics")
 def get_analytics(db: Session = Depends(get_db)):
     total_sessions = db.query(ChatSession).count()
@@ -199,3 +235,4 @@ def get_analytics(db: Session = Depends(get_db)):
     }
 
 from datetime import datetime
+# Trigger reload

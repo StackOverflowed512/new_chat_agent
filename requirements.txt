@@ -11,3 +11,5 @@ python-multipart
 # secure-smtplib
 beautifulsoup4
 psycopg2-binary
+duckduckgo-search
+pypdf

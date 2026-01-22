@@ -145,7 +145,15 @@
                     <textarea id="conf-prompt" rows="5" placeholder="Leave blank to use auto-generated prompt base on context."></textarea>
                 </div>
                 <div class="form-group">
-                    <label>JSON Data (Products/Services)</label>
+                    <label>Upload Brochure / Knowledge Base (PDF or Text)</label>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="file" id="brochure-upload" accept=".pdf,.txt,.md">
+                        <button onclick="uploadBrochure()" style="padding: 5px 15px; font-size: 0.9rem;">Upload</button>
+                    </div>
+                    <p id="upload-status" style="font-size: 0.8rem; margin-top: 5px; color: var(--text-secondary);"></p>
+                </div>
+                <div class="form-group">
+                    <label>Extra Configuration (JSON)</label>
                     <textarea id="conf-extra" rows="10"></textarea>
                 </div>
                 <button onclick="saveConfig()">Save Configuration</button>
