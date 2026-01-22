@@ -92,11 +92,32 @@ def send_email(to_email: str, subject: str, content: str, attachment_path: str =
         print(f"Failed to send email: {e}")
         return f"Failed to send email: {e}"
 
+def sanitize_html_for_reportlab(html_content):
+    """
+    Sanitizes HTML content for ReportLab's Paragraph parser.
+    ReportLab's img tag only supports: src, width, height, valign
+    This removes unsupported attributes like alt, style, etc.
+    """
+    soup = BeautifulSoup(html_content, "html.parser")
+    
+    # Find all img tags and remove unsupported attributes
+    for img in soup.find_all('img'):
+        # Keep only supported attributes
+        supported_attrs = ['src', 'width', 'height', 'valign']
+        attrs_to_remove = [attr for attr in img.attrs if attr not in supported_attrs]
+        for attr in attrs_to_remove:
+            del img[attr]
+    
+    return str(soup)
+
 def parse_html_to_flowables(html_content, styles):
     """
     Parses a string of HTML content into a list of ReportLab Flowables.
     Handles basic tags: h1-h6, p, ul, li, strong, b, em, i.
     """
+    # Sanitize HTML first to remove unsupported attributes
+    html_content = sanitize_html_for_reportlab(html_content)
+    
     soup = BeautifulSoup(html_content, "html.parser")
     flowables = []
     
