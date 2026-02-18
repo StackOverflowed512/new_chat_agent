@@ -11,6 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Initialize chat section when page loads
     initChatSection();
+
+    // Initialize speech recognition
+    initSpeechRecognition();
 });
 
 function initChatSection() {
@@ -396,5 +399,77 @@ async function uploadBrochure() {
         console.error(e);
         statusP.innerText = `Error: ${e.message}`;
         statusP.style.color = "red";
+    }
+}
+
+// --- Voice Query ---
+let recognition;
+let isListening = false;
+
+function initSpeechRecognition() {
+    const micBtn = document.getElementById('mic-btn');
+    // Check for browser support
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        recognition = new SpeechRecognition();
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        recognition.lang = 'en-US';
+
+        recognition.onstart = function() {
+            isListening = true;
+            if (micBtn) {
+                micBtn.dataset.originalColor = micBtn.style.backgroundColor;
+                micBtn.style.backgroundColor = '#ef4444'; // Red to indicate recording
+                micBtn.classList.add('recording');
+            }
+        };
+
+        recognition.onend = function() {
+            isListening = false;
+            if (micBtn) {
+                micBtn.style.backgroundColor = micBtn.dataset.originalColor || ''; // Reset color
+                micBtn.classList.remove('recording');
+            }
+        };
+
+        recognition.onresult = function(event) {
+            const transcript = event.results[0][0].transcript;
+            const inputEl = document.getElementById("user-input");
+            if (inputEl) {
+                inputEl.value = transcript;
+                sendMessage(); // Automatically send
+            }
+        };
+
+        recognition.onerror = function(event) {
+            console.error('Speech recognition error', event.error);
+            isListening = false;
+            if (micBtn) {
+                micBtn.style.backgroundColor = micBtn.dataset.originalColor || '';
+                micBtn.classList.remove('recording');
+            }
+        };
+    } else {
+        console.warn('Speech recognition not supported in this browser.');
+        if (micBtn) micBtn.style.display = 'none';
+    }
+}
+
+function toggleVoiceInput() {
+    if (!recognition) {
+        initSpeechRecognition();
+    }
+    
+    if (!recognition) return; 
+
+    if (isListening) {
+        recognition.stop();
+    } else {
+        try {
+            recognition.start();
+        } catch (e) {
+            console.error("Failed to start recognition:", e);
+        }
     }
 }
